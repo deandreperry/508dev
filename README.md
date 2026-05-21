@@ -21,7 +21,7 @@ A premium, developer-first accessibility platform focused on real implementation
 ## Live Demo
 
 ```txt
-https://deandreperry.github.io/508-dev/
+https://www.508dev.com
 ```
 
 ---
