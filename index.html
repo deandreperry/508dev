@@ -2550,6 +2550,142 @@
     margin-bottom: 4px;
   }
 
+  /* ====================================================================
+     LEGAL CITATION SYSTEM
+     ====================================================================
+   * Why legal citations matter in accessibility education:
+   * developers reading about lawsuits and standards need to verify the
+   * source themselves. Unsourced claims undermine credibility and risk
+   * spreading misinformation about precedent. Citations also let
+   * interested readers dig deeper into the actual rulings, the actual
+   * standard text, and the actual DOJ guidance — rather than relying on
+   * second-hand summaries.
+   *
+   * Why WCAG references must stay authoritative and current:
+   * WCAG evolves (2.1 → 2.2 → 3.0 Silver in draft). Linking to the
+   * authoritative w3.org URLs ensures readers always reach the canonical
+   * specification as it stands today, not a stale snapshot. Same for
+   * Section 508 ICT Refresh and DOJ guidance — these update over time
+   * and the official .gov URLs are the only sources that stay current.
+   *
+   * Design intent: minimal, Apple-style, never visually competing with
+   * the primary content. Citations are footers under case cards and a
+   * dedicated Sources section before the page footer. */
+
+  /* Citation footer attached inside each <article class="case-card"> */
+  .case-citation {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: var(--text-mut);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .case-citation cite {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.005em;
+  }
+  .case-citation .citation-sig {
+    font-style: italic;
+    color: var(--text-mut);
+  }
+
+  /* External citation link with visible ↗ indicator */
+  .citation-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    align-self: flex-start;
+    padding: 2px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+  .citation-link:hover {
+    border-bottom-color: var(--accent);
+  }
+  .citation-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .citation-link .ext-icon {
+    width: 10px;
+    height: 10px;
+    opacity: 0.75;
+    flex-shrink: 0;
+  }
+
+  /* Dedicated "Sources & Legal References" section */
+  .sources-section {
+    margin-top: 60px;
+    padding: 32px;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+  }
+  @media (max-width: 640px) {
+    .sources-section { padding: 24px; border-radius: 16px; }
+  }
+  .sources-section h3 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .sources-section .sources-intro {
+    font-size: 13.5px;
+    color: var(--text-mut);
+    line-height: 1.55;
+    max-width: 60ch;
+    margin-bottom: 28px;
+  }
+  .sources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+  }
+  .sources-col h4 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--text-mut);
+    margin-bottom: 14px;
+  }
+  .sources-col ul {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .sources-col li cite {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--text);
+    display: block;
+    margin-bottom: 2px;
+    letter-spacing: -0.005em;
+  }
+  .sources-col li .sig {
+    color: var(--text-mut);
+    font-size: 12px;
+    display: block;
+    margin-bottom: 4px;
+    line-height: 1.5;
+  }
+
   /* ---------- Challenge mode ---------- */
   body.challenge { cursor: crosshair !important; }
   body.challenge .challenge-stats { display: block; }
@@ -4238,7 +4374,7 @@
       <div class="grid md:grid-cols-2 gap-4">
 
         <article class="case-card" data-wcag="ADA Title III">
-          <h4>Robles v. Domino's Pizza</h4>
+          <h4><cite>Robles v. Domino's Pizza, LLC</cite></h4>
           <div class="case-year">9th Circuit Court of Appeals · 2019</div>
           <span class="case-amount-label">Outcome</span>
           <p class="text-sm text-ink-600 dark:text-ink-200 mb-3">Cert. denied by Supreme Court — confirmed ADA Title III applies to websites and apps with a nexus to a physical place of accommodation.</p>
@@ -4250,10 +4386,18 @@
             <div class="case-section-label">Root cause</div>
             <p class="text-sm text-ink-500 dark:text-ink-300">Missing alt text, unlabeled form fields, custom JS controls without ARIA — the basics.</p>
           </div>
+          <footer class="case-citation">
+            <cite>Robles v. Domino's Pizza, LLC, 913 F.3d 898 (9th Cir. 2019), cert. denied, 140 S. Ct. 122 (2019)</cite>
+            <span class="citation-sig">Established that ADA Title III applies to digital experiences with a nexus to a physical place of accommodation.</span>
+            <a class="citation-link" href="https://law.justia.com/cases/federal/appellate-courts/ca9/17-55504/17-55504-2019-01-15/" target="_blank" rel="noopener noreferrer" aria-label="Read the Robles v. Domino's Pizza opinion on Justia (opens in new tab)">
+              Justia · 9th Cir. opinion
+              <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </footer>
         </article>
 
         <article class="case-card" data-wcag="ADA + state law">
-          <h4>NFB v. Target</h4>
+          <h4><cite>National Federation of the Blind v. Target Corp.</cite></h4>
           <div class="case-year">N.D. Cal. · 2008 (settlement)</div>
           <span class="case-amount">$6,000,000</span>
           <span class="case-amount-label">Settlement</span>
@@ -4262,11 +4406,19 @@
             <div class="case-section-label">Root cause</div>
             <p class="text-sm text-ink-500 dark:text-ink-300">Inaccessible image maps, no keyboard navigation, missing alt text on product photos.</p>
           </div>
+          <footer class="case-citation">
+            <cite>National Federation of the Blind v. Target Corp., 452 F. Supp. 2d 946 (N.D. Cal. 2006); settled 2008</cite>
+            <span class="citation-sig">First major federal ruling that the ADA reaches retail e-commerce websites tied to physical stores.</span>
+            <a class="citation-link" href="https://law.justia.com/cases/federal/district-courts/FSupp2/452/946/2595938/" target="_blank" rel="noopener noreferrer" aria-label="Read the NFB v. Target ruling on Justia (opens in new tab)">
+              Justia · N.D. Cal. opinion
+              <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </footer>
         </article>
 
         <article class="case-card" data-wcag="State a11y law">
-          <h4>NY AG v. Sephora</h4>
-          <div class="case-year">New York · 2022 (settlement)</div>
+          <h4><cite>People of the State of New York v. Sephora USA, Inc.</cite></h4>
+          <div class="case-year">New York Attorney General · 2022 (Assurance of Discontinuance)</div>
           <span class="case-amount">$2,000,000</span>
           <span class="case-amount-label">Penalty + remediation</span>
           <p class="text-sm text-ink-600 dark:text-ink-200 mb-3">Sephora.com inaccessible to blind users; required to bring site to WCAG 2.1 AA and audit annually.</p>
@@ -4274,10 +4426,18 @@
             <div class="case-section-label">Root cause</div>
             <p class="text-sm text-ink-500 dark:text-ink-300">Color-only error states, missing form labels, focus traps in product carousel.</p>
           </div>
+          <footer class="case-citation">
+            <cite>In re Sephora USA, Inc., Assurance of Discontinuance No. 22-077 (N.Y. Att'y Gen. 2022)</cite>
+            <span class="citation-sig">State AGs can enforce digital accessibility under state consumer-protection statutes — federal lawsuit not required.</span>
+            <a class="citation-link" href="https://ag.ny.gov/sites/default/files/2022-sephora-aod-fully-executed-redacted.pdf" target="_blank" rel="noopener noreferrer" aria-label="Read the New York AG's Sephora Assurance of Discontinuance (PDF, opens in new tab)">
+              N.Y. AG · Assurance (PDF)
+              <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </footer>
         </article>
 
         <article class="case-card" data-wcag="ADA Title III">
-          <h4>Andrews v. Blick Art Materials</h4>
+          <h4><cite>Andrews v. Blick Art Materials, LLC</cite></h4>
           <div class="case-year">E.D.N.Y. · 2017</div>
           <span class="case-amount-label">Outcome</span>
           <p class="text-sm text-ink-600 dark:text-ink-200 mb-3">Federal judge held the ADA applies to standalone commercial websites — no physical nexus required.</p>
@@ -4285,6 +4445,52 @@
             <div class="case-section-label">Significance</div>
             <p class="text-sm text-ink-500 dark:text-ink-300">Used in subsequent suits as precedent for "pure" e-commerce. Opened the door to thousands of filings.</p>
           </div>
+          <footer class="case-citation">
+            <cite>Andrews v. Blick Art Materials, LLC, 268 F. Supp. 3d 381 (E.D.N.Y. 2017)</cite>
+            <span class="citation-sig">Held that the ADA covers standalone commercial websites independent of any physical place of accommodation.</span>
+            <a class="citation-link" href="https://law.justia.com/cases/federal/district-courts/new-york/nyedce/1:2017cv00767/410536/29/" target="_blank" rel="noopener noreferrer" aria-label="Read the Andrews v. Blick Art Materials opinion on Justia (opens in new tab)">
+              Justia · E.D.N.Y. opinion
+              <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </footer>
+        </article>
+
+        <article class="case-card" data-wcag="ADA Title III · Circuit split">
+          <h4><cite>Gil v. Winn-Dixie Stores, Inc.</cite></h4>
+          <div class="case-year">11th Circuit Court of Appeals · 2021 (vacated as moot)</div>
+          <span class="case-amount-label">Outcome</span>
+          <p class="text-sm text-ink-600 dark:text-ink-200 mb-3">Trial court initially ruled Winn-Dixie's website violated the ADA. The 11th Circuit later reversed, holding websites are not themselves "places of public accommodation."</p>
+          <div class="case-section">
+            <div class="case-section-label">Why it matters</div>
+            <p class="text-sm text-ink-500 dark:text-ink-300">Created a federal circuit split with the 9th Circuit (<em>Robles</em>). The 11th Circuit panel was later vacated as moot, but the disagreement among circuits remains unresolved by the Supreme Court.</p>
+          </div>
+          <footer class="case-citation">
+            <cite>Gil v. Winn-Dixie Stores, Inc., 257 F. Supp. 3d 1340 (S.D. Fla. 2017); rev'd, 993 F.3d 1266 (11th Cir. 2021); vacated as moot, 21 F.4th 775 (11th Cir. 2021)</cite>
+            <span class="citation-sig">Created a federal circuit split on whether standalone websites qualify as ADA "places of public accommodation."</span>
+            <a class="citation-link" href="https://law.justia.com/cases/federal/appellate-courts/ca11/17-13467/17-13467-2021-04-07/" target="_blank" rel="noopener noreferrer" aria-label="Read the Gil v. Winn-Dixie 11th Circuit opinion on Justia (opens in new tab)">
+              Justia · 11th Cir. opinion
+              <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </footer>
+        </article>
+
+        <article class="case-card" data-wcag="ADA Title II · Foundational">
+          <h4><cite>Tennessee v. Lane</cite></h4>
+          <div class="case-year">U.S. Supreme Court · 2004</div>
+          <span class="case-amount-label">Outcome</span>
+          <p class="text-sm text-ink-600 dark:text-ink-200 mb-3">5–4 ruling that Title II of the ADA validly abrogates state sovereign immunity where fundamental rights (here, courthouse access) are at stake.</p>
+          <div class="case-section">
+            <div class="case-section-label">Why it matters</div>
+            <p class="text-sm text-ink-500 dark:text-ink-300">Foundational Supreme Court precedent confirming that the ADA can require states to make public services — increasingly including digital services — accessible.</p>
+          </div>
+          <footer class="case-citation">
+            <cite>Tennessee v. Lane, 541 U.S. 509 (2004)</cite>
+            <span class="citation-sig">Supreme Court precedent that the ADA validly applies to state services when fundamental rights are implicated.</span>
+            <a class="citation-link" href="https://supreme.justia.com/cases/federal/us/541/509/" target="_blank" rel="noopener noreferrer" aria-label="Read the Tennessee v. Lane Supreme Court opinion on Justia (opens in new tab)">
+              Justia · Supreme Court opinion
+              <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </footer>
         </article>
 
       </div>
@@ -4538,6 +4744,197 @@
 
   </section>
 
+<!-- ============================================================== -->
+<!-- SOURCES & LEGAL REFERENCES                                     -->
+<!--                                                                -->
+<!-- A consolidated, authoritative bibliography. All standards URLs -->
+<!-- point to the canonical w3.org / .gov / federal court sources   -->
+<!-- so the references stay current as the standards evolve         -->
+<!-- (WCAG 2.1 → 2.2 → 3.0; Section 508 Refresh; DOJ guidance).     -->
+<!-- ============================================================== -->
+<section id="sources" class="sources-section max-w-7xl mx-auto px-6 sm:px-8 mt-12" aria-labelledby="sources-heading">
+  <h3 id="sources-heading" class="display">Sources &amp; Legal References</h3>
+  <p class="sources-intro">
+    Every legal claim, standard, and case study in this platform is grounded in primary sources. Standards URLs point to the W3C and U.S. government canonical documents so they stay current as the specifications and guidance evolve.
+  </p>
+
+  <div class="sources-grid">
+
+    <!-- Standards & specifications -->
+    <div class="sources-col">
+      <h4>Standards &amp; specifications</h4>
+      <ul>
+        <li>
+          <cite>WCAG 2.1 (W3C Recommendation)</cite>
+          <span class="sig">The current de facto baseline for digital accessibility under the ADA.</span>
+          <a class="citation-link" href="https://www.w3.org/TR/WCAG21/" target="_blank" rel="noopener noreferrer" aria-label="W3C Web Content Accessibility Guidelines 2.1 (opens in new tab)">
+            w3.org/TR/WCAG21
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <cite>WCAG 2.2 (W3C Recommendation)</cite>
+          <span class="sig">Adds 9 new success criteria covering touch targets, focus visibility, and authentication.</span>
+          <a class="citation-link" href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer" aria-label="W3C Web Content Accessibility Guidelines 2.2 (opens in new tab)">
+            w3.org/TR/WCAG22
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <cite>WAI-ARIA Authoring Practices Guide</cite>
+          <span class="sig">Reference patterns and keyboard interactions for every interactive widget.</span>
+          <a class="citation-link" href="https://www.w3.org/WAI/ARIA/apg/" target="_blank" rel="noopener noreferrer" aria-label="WAI-ARIA Authoring Practices Guide (opens in new tab)">
+            w3.org/WAI/ARIA/apg
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <cite>Section 508 ICT Refresh (2018)</cite>
+          <span class="sig">Adopted WCAG 2.0 Level AA by reference as the federal standard for U.S. agencies and contractors.</span>
+          <a class="citation-link" href="https://www.access-board.gov/ict/" target="_blank" rel="noopener noreferrer" aria-label="U.S. Access Board Information and Communication Technology (ICT) Refresh (opens in new tab)">
+            access-board.gov/ict
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Government resources -->
+    <div class="sources-col">
+      <h4>Government resources</h4>
+      <ul>
+        <li>
+          <cite>ADA.gov</cite>
+          <span class="sig">Official U.S. Department of Justice ADA portal.</span>
+          <a class="citation-link" href="https://www.ada.gov/" target="_blank" rel="noopener noreferrer" aria-label="ADA.gov — U.S. DOJ ADA portal (opens in new tab)">
+            ada.gov
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <cite>DOJ Guidance on Web Accessibility &amp; the ADA (2022)</cite>
+          <span class="sig">Department of Justice's official position that ADA Title II and III apply to web content.</span>
+          <a class="citation-link" href="https://www.ada.gov/resources/web-guidance/" target="_blank" rel="noopener noreferrer" aria-label="U.S. Department of Justice — Guidance on Web Accessibility and the ADA (opens in new tab)">
+            ada.gov/resources/web-guidance
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <cite>Section508.gov</cite>
+          <span class="sig">Federal government's central resource for Section 508 compliance, testing, and procurement.</span>
+          <a class="citation-link" href="https://www.section508.gov/" target="_blank" rel="noopener noreferrer" aria-label="Section508.gov — federal Section 508 compliance resource (opens in new tab)">
+            section508.gov
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <cite>DOJ Title II Web &amp; Mobile Rule (28 C.F.R. § 35.200, 2024)</cite>
+          <span class="sig">Final rule requiring state and local governments' web content and mobile apps to conform to WCAG 2.1 Level AA.</span>
+          <a class="citation-link" href="https://www.ada.gov/notices/2024/04/24/web-rule/" target="_blank" rel="noopener noreferrer" aria-label="DOJ Title II Web and Mobile App Accessibility Final Rule (opens in new tab)">
+            ada.gov · Title II web rule
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Landmark cases -->
+    <div class="sources-col">
+      <h4>Landmark cases</h4>
+      <ul>
+        <li>
+          <cite>Tennessee v. Lane</cite>, 541 U.S. 509 (2004)
+          <span class="sig">Supreme Court — ADA Title II validly applies to state services when fundamental rights are implicated.</span>
+          <a class="citation-link" href="https://supreme.justia.com/cases/federal/us/541/509/" target="_blank" rel="noopener noreferrer" aria-label="Tennessee v. Lane, 541 U.S. 509 — Supreme Court opinion on Justia (opens in new tab)">
+            Justia · Supreme Court
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <cite>NFB v. Target Corp.</cite>, 452 F. Supp. 2d 946 (N.D. Cal. 2006)
+          <span class="sig">First major federal ruling that retail e-commerce sites are subject to the ADA.</span>
+          <a class="citation-link" href="https://law.justia.com/cases/federal/district-courts/FSupp2/452/946/2595938/" target="_blank" rel="noopener noreferrer" aria-label="NFB v. Target opinion on Justia (opens in new tab)">
+            Justia · N.D. Cal.
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <cite>Andrews v. Blick Art Materials, LLC</cite>, 268 F. Supp. 3d 381 (E.D.N.Y. 2017)
+          <span class="sig">ADA covers standalone commercial websites independent of any physical location.</span>
+          <a class="citation-link" href="https://law.justia.com/cases/federal/district-courts/new-york/nyedce/1:2017cv00767/410536/29/" target="_blank" rel="noopener noreferrer" aria-label="Andrews v. Blick Art Materials opinion on Justia (opens in new tab)">
+            Justia · E.D.N.Y.
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <cite>Robles v. Domino's Pizza, LLC</cite>, 913 F.3d 898 (9th Cir. 2019)
+          <span class="sig">Title III applies to digital experiences with a nexus to a physical place of accommodation.</span>
+          <a class="citation-link" href="https://law.justia.com/cases/federal/appellate-courts/ca9/17-55504/17-55504-2019-01-15/" target="_blank" rel="noopener noreferrer" aria-label="Robles v. Domino's Pizza opinion on Justia (opens in new tab)">
+            Justia · 9th Cir.
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <cite>Gil v. Winn-Dixie Stores, Inc.</cite>, 993 F.3d 1266 (11th Cir. 2021), vacated as moot
+          <span class="sig">Created the federal circuit split with the 9th Circuit over whether standalone websites are ADA "places of public accommodation."</span>
+          <a class="citation-link" href="https://law.justia.com/cases/federal/appellate-courts/ca11/17-13467/17-13467-2021-04-07/" target="_blank" rel="noopener noreferrer" aria-label="Gil v. Winn-Dixie 11th Circuit opinion on Justia (opens in new tab)">
+            Justia · 11th Cir.
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <cite>In re Sephora USA, Inc.</cite>, AOD No. 22-077 (N.Y. Att'y Gen. 2022)
+          <span class="sig">State attorneys general can enforce digital accessibility under state consumer-protection laws.</span>
+          <a class="citation-link" href="https://ag.ny.gov/sites/default/files/2022-sephora-aod-fully-executed-redacted.pdf" target="_blank" rel="noopener noreferrer" aria-label="New York Attorney General Sephora Assurance of Discontinuance (PDF, opens in new tab)">
+            N.Y. AG · AOD (PDF)
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Testing & evaluation -->
+    <div class="sources-col">
+      <h4>Testing &amp; evaluation</h4>
+      <ul>
+        <li>
+          <cite>WCAG 2 Quick Reference (W3C)</cite>
+          <span class="sig">Customizable filter view of all success criteria, techniques, and failures.</span>
+          <a class="citation-link" href="https://www.w3.org/WAI/WCAG22/quickref/" target="_blank" rel="noopener noreferrer" aria-label="W3C WCAG 2 Quick Reference (opens in new tab)">
+            w3.org/WAI/WCAG22/quickref
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <cite>WAI Easy Checks (W3C)</cite>
+          <span class="sig">First-pass manual audit checklist any developer can run on any page.</span>
+          <a class="citation-link" href="https://www.w3.org/WAI/test-evaluate/preliminary/" target="_blank" rel="noopener noreferrer" aria-label="W3C WAI Easy Checks preliminary review (opens in new tab)">
+            w3.org/WAI/test-evaluate
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <cite>WebAIM Contrast Checker</cite>
+          <span class="sig">Industry-standard tool for verifying WCAG 1.4.3 / 1.4.6 / 1.4.11 contrast.</span>
+          <a class="citation-link" href="https://webaim.org/resources/contrastchecker/" target="_blank" rel="noopener noreferrer" aria-label="WebAIM Color Contrast Checker (opens in new tab)">
+            webaim.org/contrast
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <cite>U.S. DOJ ADA Title III Technical Assistance Manual</cite>
+          <span class="sig">Authoritative federal interpretation of Title III obligations.</span>
+          <a class="citation-link" href="https://www.ada.gov/law-and-regs/title-iii-regulations/" target="_blank" rel="noopener noreferrer" aria-label="U.S. DOJ ADA Title III regulations and technical assistance (opens in new tab)">
+            ada.gov · Title III regs
+            <svg class="ext-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
 </main>
 
 <!-- ============================================================== -->
@@ -4560,10 +4957,11 @@
       <div>
         <h4 class="text-[11px] uppercase tracking-wider font-semibold text-ink-500 mb-4">Standards</h4>
         <ul class="space-y-2 text-sm">
-          <li><a href="https://www.w3.org/TR/WCAG21/" rel="noopener" class="hover:text-accent dark:hover:text-accent-dark transition-colors">WCAG 2.1</a></li>
-          <li><a href="https://www.w3.org/TR/WCAG22/" rel="noopener" class="hover:text-accent dark:hover:text-accent-dark transition-colors">WCAG 2.2</a></li>
-          <li><a href="https://www.section508.gov/" rel="noopener" class="hover:text-accent dark:hover:text-accent-dark transition-colors">Section 508</a></li>
-          <li><a href="https://www.ada.gov/" rel="noopener" class="hover:text-accent dark:hover:text-accent-dark transition-colors">ADA.gov</a></li>
+          <li><a href="https://www.w3.org/TR/WCAG21/" target="_blank" rel="noopener noreferrer" aria-label="WCAG 2.1 (opens in new tab)" class="hover:text-accent dark:hover:text-accent-dark transition-colors">WCAG 2.1</a></li>
+          <li><a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer" aria-label="WCAG 2.2 (opens in new tab)" class="hover:text-accent dark:hover:text-accent-dark transition-colors">WCAG 2.2</a></li>
+          <li><a href="https://www.section508.gov/" target="_blank" rel="noopener noreferrer" aria-label="Section508.gov (opens in new tab)" class="hover:text-accent dark:hover:text-accent-dark transition-colors">Section 508</a></li>
+          <li><a href="https://www.ada.gov/" target="_blank" rel="noopener noreferrer" aria-label="ADA.gov (opens in new tab)" class="hover:text-accent dark:hover:text-accent-dark transition-colors">ADA.gov</a></li>
+          <li><a href="#sources" class="hover:text-accent dark:hover:text-accent-dark transition-colors">Full sources &amp; citations →</a></li>
         </ul>
       </div>
       <div>
@@ -7180,6 +7578,7 @@
           { label: 'Pre-Merge Checklist', href: '#pre-merge' },
           { label: 'Legal Frameworks',    href: '#legal' },
           { label: "What's New in 2.2",   href: '#quickref' },
+          { label: 'Sources & citations',  href: '#sources' },
         ],
       },
     ];
@@ -7592,6 +7991,7 @@
       { type:'section', title:'Mobile A11y', sub:'Touch targets, orientation, reflow, motion', href:'#mobile', icon:'phone' },
       { type:'section', title:'Legal Frameworks', sub:'Section 508, ADA Title III, cases', href:'#legal', icon:'shield' },
       { type:'section', title:'Quick Reference', sub:"What's new in WCAG 2.2", href:'#quickref', icon:'book' },
+      { type:'section', title:'Sources & Legal References', sub:'WCAG, Section 508, ADA, DOJ guidance, landmark cases', href:'#sources', icon:'book' },
       { type:'section', title:'Quiz', sub:'Test your knowledge', href:'#quiz', icon:'check' },
     ];
     const PATTERN_ITEMS = [
