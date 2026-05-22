@@ -411,6 +411,66 @@
   .dark .hc-button { background: #2997ff; color: #0a0a0b; border-color: #2997ff; }
   .dark .hc-icon   { color: #f5f5f7; }
 
+  /* ---------- Primary action button ----------
+   * Semantic CTA used by every pattern-library demo (Modal Open, Toast
+   * Save, Menu trigger, Form Submit, etc). Color identity is intentionally
+   * STATIC across light and dark mode — the brand action color does not
+   * change between themes, only surrounding surfaces do.
+   *
+   * Contrast: #0071e3 background vs #ffffff text = 4.69:1 — passes WCAG
+   * 2.1 AA for normal text (4.5:1 required) and AAA for large text.
+   *
+   * This class owns ONLY color and state. Sizing, padding, radius, and
+   * weight are left to utility classes so individual buttons can vary
+   * in dimensions without touching the brand color identity. */
+  .btn-primary {
+    background-color: #0071e3;
+    color: #ffffff;
+    border: 1px solid #0071e3;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    cursor: pointer;
+  }
+  .btn-primary:hover {
+    background-color: #0061cc;
+    border-color: #0061cc;
+  }
+  .btn-primary:active {
+    background-color: #004ea8;
+    border-color: #004ea8;
+    transform: translateY(0.5px);
+  }
+  .btn-primary:focus-visible {
+    outline: 4px solid #0071e3;
+    outline-offset: 3px;
+    /* Match the global focus-ring system used elsewhere on the page */
+  }
+  .btn-primary:disabled,
+  .btn-primary[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  /* Dark mode explicitly REASSERTS the same colors so any cascading
+     dark-mode rule (current or future) cannot accidentally darken the
+     text or lighten the background. This guards against the regression
+     that originally surfaced as "blue button with black text". */
+  html.dark .btn-primary {
+    background-color: #0071e3;
+    color: #ffffff;
+    border-color: #0071e3;
+  }
+  html.dark .btn-primary:hover {
+    background-color: #0061cc;
+    border-color: #0061cc;
+  }
+  html.dark .btn-primary:active {
+    background-color: #004ea8;
+    border-color: #004ea8;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-primary { transition: none; }
+    .btn-primary:active { transform: none; }
+  }
+
   /* ---------- Tab pill nav ---------- */
   .tab-btn[aria-selected="true"] {
     background-color: #0a0a0b; color: white;
@@ -3355,14 +3415,14 @@
         </div>
         <div class="pattern-demo">
           <div id="modal-demo-root" class="relative w-full" style="min-height:140px;">
-            <button class="px-4 py-2 rounded-lg bg-accent dark:bg-accent-dark text-white dark:text-ink-900 font-semibold text-sm" id="modal-open">Open dialog</button>
+            <button class="btn-primary px-4 py-2 rounded-lg font-semibold text-sm" id="modal-open">Open dialog</button>
             <div class="modal-backdrop" id="modal-bd" role="dialog" aria-modal="true" aria-labelledby="modal-h">
               <div class="modal-box">
                 <h4 id="modal-h" class="font-semibold mb-2">Confirm action</h4>
                 <p class="text-sm text-ink-500 dark:text-ink-300 mb-4">This focus is trapped. Try Tab and Shift+Tab.</p>
                 <div class="flex gap-2 justify-end">
                   <button class="px-3 py-1.5 text-sm rounded-lg border border-ink-200 dark:border-ink-700" id="modal-cancel">Cancel</button>
-                  <button class="px-3 py-1.5 text-sm rounded-lg bg-accent dark:bg-accent-dark text-white dark:text-ink-900 font-semibold" id="modal-ok">Confirm</button>
+                  <button class="btn-primary px-3 py-1.5 text-sm rounded-lg font-semibold" id="modal-ok">Confirm</button>
                 </div>
               </div>
             </div>
@@ -3516,7 +3576,7 @@
         </div>
         <div class="pattern-demo">
           <div class="flex flex-col items-center gap-4 w-full">
-            <button id="toast-trigger" class="px-4 py-2 rounded-lg bg-accent dark:bg-accent-dark text-white dark:text-ink-900 font-semibold text-sm">Save changes</button>
+            <button id="toast-trigger" class="btn-primary px-4 py-2 rounded-lg font-semibold text-sm">Save changes</button>
             <div class="toast-demo-region" role="region" aria-label="Notifications">
               <div id="toast-demo" class="toast-demo" role="status" aria-live="polite">Changes saved successfully</div>
             </div>
@@ -3655,7 +3715,7 @@
         </div>
         <div class="pattern-demo">
           <div class="relative" id="menu-demo">
-            <button id="menu-btn" class="px-4 py-2 rounded-lg bg-accent dark:bg-accent-dark text-white dark:text-ink-900 font-semibold text-sm flex items-center gap-2" aria-haspopup="menu" aria-expanded="false" aria-controls="menu-list">
+            <button id="menu-btn" class="btn-primary px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-2" aria-haspopup="menu" aria-expanded="false" aria-controls="menu-list">
               Actions
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
             </button>
@@ -3702,7 +3762,7 @@
               <input id="form-email" type="email" required class="w-full px-3 py-2 rounded-lg border border-ink-200 dark:border-ink-600 bg-white dark:bg-ink-800 text-sm" aria-describedby="form-email-err" aria-invalid="false">
               <p id="form-email-err" class="text-xs mt-1 text-danger-light dark:text-danger-dark" hidden></p>
             </div>
-            <button id="form-submit" class="w-full px-4 py-2 rounded-lg bg-accent dark:bg-accent-dark text-white dark:text-ink-900 font-semibold text-sm">Submit</button>
+            <button id="form-submit" class="btn-primary w-full px-4 py-2 rounded-lg font-semibold text-sm">Submit</button>
             <div id="form-status" role="status" aria-live="polite" class="text-xs mt-2 text-center"></div>
           </div>
         </div>
