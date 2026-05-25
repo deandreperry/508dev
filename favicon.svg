@@ -1,6 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="16" fill="#0a0a0b"/>
-  
+  <style>
+    .bg { fill: #ffffff; }
+    .text { fill: #0a0a0b; }
+    .dot { fill: #0071e3; }
+
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #0a0a0b; }
+      .text { fill: #ffffff; }
+    }
+  </style>
+
+  <rect class="bg" width="64" height="64" rx="16"/>
+
   <text
     x="50%"
     y="54%"
@@ -9,10 +20,10 @@
     font-family="Arial, Helvetica, sans-serif"
     font-size="28"
     font-weight="700"
-    fill="#ffffff"
+    class="text"
   >
     508
   </text>
 
-  <circle cx="50" cy="14" r="4" fill="#0071e3"/>
+  <circle class="dot" cx="50" cy="14" r="4"/>
 </svg>
